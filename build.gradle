@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+buildscript {
+    ext.kotlin_version = '1.1.4-2'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.7'
+
+    // https://mvnrepository.com/artifact/com.yuvimasory/orange-extensions
+    compile group: 'com.yuvimasory', name: 'orange-extensions', version: '1.3.0'
+
+    // https://mvnrepository.com/artifact/com.github.jai-imageio/jai-imageio-core
+    compile group: 'com.github.jai-imageio', name: 'jai-imageio-core', version: '1.3.1'
+
+    // https://mvnrepository.com/artifact/com.github.jai-imageio/jai-imageio-jpeg2000
+    compile group: 'com.github.jai-imageio', name: 'jai-imageio-jpeg2000', version: '1.3.0'
+}
