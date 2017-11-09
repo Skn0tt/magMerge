@@ -75,7 +75,8 @@
               </grid>
             </constraints>
             <properties>
-              <toolTipText value="#"/>
+              <text value="#"/>
+              <toolTipText value="Issue Number"/>
             </properties>
           </component>
         </children>

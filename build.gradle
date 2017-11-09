@@ -1,14 +1,36 @@
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'application'
 buildscript {
-    ext.kotlin_version = '1.1.4-2'
+    ext.kotlin_version = '1.1.51'
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+}
+
+plugins {
+    id "edu.sc.seis.macAppBundle" version "2.1.8"
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+mainClassName = 'MagMerge'
+
+macAppBundle {
+    mainClassName = "MagMerge"
+    bundleJRE = true
+    javaProperties.put("apple.laf.useScreenMenuBar", "true")
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'MagMerge'
+    }
+
+    // This line of code recursively collects and copies all of a project's files
+    // and adds them to the JAR itself. One can extend this task, to skip certain
+    // files or particular types at will
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 repositories {
     mavenCentral()
@@ -27,4 +49,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.jai-imageio/jai-imageio-jpeg2000
     compile group: 'com.github.jai-imageio', name: 'jai-imageio-jpeg2000', version: '1.3.0'
+
+    // https://mvnrepository.com/artifact/com.intellij/forms_rt
+    compile group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
 }
