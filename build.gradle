@@ -2,39 +2,34 @@ buildscript {
     ext.kotlin_version = '1.1.51'
     repositories {
         mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+        classpath "gradle.plugin.edu.sc.seis:macAppBundle:2.1.9"
     }
 }
 
-plugins {
-    id "edu.sc.seis.macAppBundle" version "2.1.8"
-}
-
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "edu.sc.seis.macAppBundle"
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'application'
+
 mainClassName = 'MagMerge'
+version = 1.0
 
-macAppBundle {
-    mainClassName = "MagMerge"
-    bundleJRE = true
-    javaProperties.put("apple.laf.useScreenMenuBar", "true")
-}
-jar {
-    manifest {
-        attributes 'Main-Class': 'MagMerge'
-    }
+defaultTasks 'run'
 
-    // This line of code recursively collects and copies all of a project's files
-    // and adds them to the JAR itself. One can extend this task, to skip certain
-    // files or particular types at will
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
 repositories {
+    flatDir dirs: "${rootDir}/lib"
     mavenCentral()
 }
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -50,6 +45,26 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.jai-imageio/jai-imageio-jpeg2000
     compile group: 'com.github.jai-imageio', name: 'jai-imageio-jpeg2000', version: '1.3.0'
 
-    // https://mvnrepository.com/artifact/com.intellij/forms_rt
-    compile group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
+    // IntelliJ Forms
+    compile name: 'forms_rt'
+}
+
+/**
+ * BuildSettings
+ */
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+macAppBundle {
+    mainClassName = "MagMerge"
+    bundleJRE = true
+    jreHome = '/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home'
+    icon = "res/logo.icns"
+
+    javaProperties.put("apple.laf.useScreenMenuBar", "true")
+    runtimeConfigurationName = 'shadow'
+    jarTask = 'shadowJar'
 }
