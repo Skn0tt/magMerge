@@ -238,7 +238,11 @@ public class MagMerge {
     private void btnPressed_Go() {
         if (!checkLegal()) return;
 
-        ImageKt.merge(inputPathTxtFld.getText(), outputPathTxtFld.getText(), Integer.parseInt(issueTxtFld.getText()));
+        ImageKt.merge(
+          inputPathTxtFld.getText(),
+          outputPathTxtFld.getText(),
+          issueTxtFld.getText()
+        );
 
         alert("Done!");
     }
