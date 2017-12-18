@@ -75,3 +75,6 @@ fabric.properties
 # Gradle
 build
 .gradle
+
+# forms_rt
+!lib/forms_rt.jar

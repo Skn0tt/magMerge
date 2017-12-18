@@ -84,10 +84,6 @@ public class MagMerge {
      */
     private static void setupOS_macOS() {
         Application app = Application.getApplication();
-        /*  TODO: Create Logo
-        Image img = Toolkit.getDefaultToolkit().getImage("res/logo.png");
-        app.setDockIconImage(img);
-        */
         app.setAboutHandler(ae -> showAbout());
     }
 

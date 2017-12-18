@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/magMerge.iml" filepath="$PROJECT_DIR$/magMerge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/magMerge_main.iml" filepath="$PROJECT_DIR$/.idea/modules/magMerge_main.iml" group="magMerge" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/magMerge_test.iml" filepath="$PROJECT_DIR$/.idea/modules/magMerge_test.iml" group="magMerge" />
     </modules>
   </component>
 </project>
